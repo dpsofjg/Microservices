@@ -1,0 +1,1 @@
+1. Подключение к серверу Eureka: http://localhost:8761

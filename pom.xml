@@ -10,9 +10,25 @@
 
     <packaging>pom</packaging>
 
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
     <modules>
         <module>business-services</module>
         <module>platform-services</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-parent</artifactId>
+                <version>Greenwich.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

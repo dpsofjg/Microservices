@@ -1,6 +1,6 @@
-package com.example.discovery.client;
+package com.example.one;
 
-import com.example.discovery.controller.GreetingController;
+import com.example.one.controller.GreetingController;
 import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
