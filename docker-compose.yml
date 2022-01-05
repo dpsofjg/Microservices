@@ -1,0 +1,53 @@
+version: '2'
+services:
+    zipkin:
+        image: openzipkin/zipkin
+        ports:
+            - "9411:9411"
+        networks:
+            - spring-cloud-network
+
+    graphite:
+        image: graphiteapp/graphite-statsd
+        ports:
+            - "2003:2003"
+        networks:
+            - spring-cloud-network
+
+    discovery:
+        build: ../platform-services/discovery/target/docker
+        ports:
+            - "8761:8761"
+        networks:
+            - spring-cloud-network
+
+    apigateway:
+        build: ../platform-services/apigateway/target/docker
+        ports:
+            - "8765:8765"
+        links:
+            - discovery
+        networks:
+            - spring-cloud-network
+
+    one:
+        build: ../business-services/one/target/docker
+        links:
+            - zipkin
+            - graphite
+            - discovery
+        networks:
+            - spring-cloud-network
+
+    two:
+        build: ../business-services/two/target/docker
+        links:
+            - zipkin
+            - graphite
+            - discovery
+        networks:
+            - spring-cloud-network
+
+networks:
+    spring-cloud-network:
+        driver: bridge
