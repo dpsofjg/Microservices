@@ -2,4 +2,4 @@ zuul:
   routes:
     foos:
       path: /foos/**
-      url: http://localhost:8081/spring-zuul-foos-resource/foos
+      url: http://localhost:52896 # резолвить динамический порт (адрес) возможно регаться в еврике или из коммон файла

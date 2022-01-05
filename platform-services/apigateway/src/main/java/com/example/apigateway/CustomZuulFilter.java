@@ -2,9 +2,8 @@ package com.example.apigateway;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class CustomZuulFilter extends ZuulFilter {
 
     public Object run() {
