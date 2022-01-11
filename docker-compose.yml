@@ -15,7 +15,7 @@ services:
             - spring-cloud-network
 
     discovery:
-        build: ../platform-services/discovery/target/docker
+        build: ./platform-services/discovery/target/docker
         ports:
             - "8761:8761"
         networks:

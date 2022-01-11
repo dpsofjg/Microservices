@@ -37,20 +37,21 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
+                        <id>add-dockerfile</id>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>add-resource</goal>
                         </goals>
                         <configuration>
                             <resources>
-                                <resourse>
-                                    <directory>${base-path}/docker/springboot-app</directory>
+                                <resource>
+                                    <directory>${basedir}/docker/springboot-app</directory>
                                     <targetPath>${project.build.directory}/docker</targetPath>
                                     <filtering>true</filtering>
-                                </resourse>
+                                </resource>
                             </resources>
                         </configuration>
                     </execution>
