@@ -22,7 +22,7 @@ services:
             - spring-cloud-network
 
     apigateway:
-        build: ../platform-services/apigateway/target/docker
+        build: ./platform-services/apigateway/target/docker
         ports:
             - "8765:8765"
         links:
@@ -31,7 +31,7 @@ services:
             - spring-cloud-network
 
     one:
-        build: ../business-services/one/target/docker
+        build: ./business-services/one/target/docker
         links:
             - zipkin
             - graphite
@@ -40,7 +40,7 @@ services:
             - spring-cloud-network
 
     two:
-        build: ../business-services/two/target/docker
+        build: ./business-services/two/target/docker
         links:
             - zipkin
             - graphite
