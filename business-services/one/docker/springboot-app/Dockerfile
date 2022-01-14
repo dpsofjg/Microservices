@@ -5,8 +5,8 @@ VOLUME /tmp
 ## LABEL ${LABEL_GROUP}="${LABEL_ID}"
 ## LABEL description="${LABEL_DESCRIPTION}"
 
-COPY ../target/one-0.0.1-SNAPSHOT.jar one.jar
+COPY ${project.build.finalName}.${packaging} app.jar
 
 ##EXPOSE ${PORT_TO_EXPOSE}
 
-ENTRYPOINT ["java","-jar","/one.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]

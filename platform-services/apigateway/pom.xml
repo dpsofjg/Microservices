@@ -33,6 +33,10 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>3.2.0</version>
@@ -47,7 +51,7 @@
                             <resources>
                                 <resource>
                                     <directory>${basedir}/docker/springboot-app</directory>
-                                    <targetPath>${project.build.directory}/docker</targetPath>
+                                    <targetPath>${project.build.directory}</targetPath>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
     zipkin:
         image: openzipkin/zipkin
@@ -6,6 +6,10 @@ services:
             - "9411:9411"
         networks:
             - spring-cloud-network
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
 
     graphite:
         image: graphiteapp/graphite-statsd
@@ -13,40 +17,62 @@ services:
             - "2003:2003"
         networks:
             - spring-cloud-network
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
 
     discovery:
-        build: ./platform-services/discovery/target/docker
+        build: ./platform-services/discovery/target/
         ports:
             - "8761:8761"
         networks:
             - spring-cloud-network
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
 
     apigateway:
-        build: ./platform-services/apigateway/target/docker
+        build: ./platform-services/apigateway/target/
         ports:
             - "8765:8765"
         links:
             - discovery
         networks:
             - spring-cloud-network
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
 
     one:
-        build: ./business-services/one/target/docker
+        build: ./business-services/one/target/
+        environment:
+            debug: true
         links:
             - zipkin
             - graphite
             - discovery
         networks:
             - spring-cloud-network
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
 
     two:
-        build: ./business-services/two/target/docker
+        build: ./business-services/two/target/
         links:
             - zipkin
             - graphite
             - discovery
         networks:
             - spring-cloud-network
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
 
 networks:
     spring-cloud-network:

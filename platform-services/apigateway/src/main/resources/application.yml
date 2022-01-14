@@ -1,6 +1,6 @@
 spring:
   application:
-    name: zuul-server
+    name: apigateway
 server:
   port: 8762
 eureka:
@@ -12,6 +12,9 @@ eureka:
 
 zuul:
   routes:
-    foos:
-      path: /greeting/**
+    service_one:
+      path: /one
       url: http://localhost:8081/greeting/
+    service_two:
+      path: /two
+      url: http://localhost:8082/greeting/
