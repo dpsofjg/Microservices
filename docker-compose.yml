@@ -1,79 +1,65 @@
-version: '3'
+version: '2'
 services:
-    zipkin:
-        image: openzipkin/zipkin
-        ports:
-            - "9411:9411"
-        networks:
-            - spring-cloud-network
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
+  zipkin:
+    image: openzipkin/zipkin
+    mem_limit: 256m
+    mem_reservation: 128M
+    ports:
+      - "9411:9411"
+    networks:
+      - spring-cloud-network
 
-    graphite:
-        image: graphiteapp/graphite-statsd
-        ports:
-            - "2003:2003"
-        networks:
-            - spring-cloud-network
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
+  graphite:
+    image: graphiteapp/graphite-statsd
+    mem_limit: 256m
+    mem_reservation: 128M
+    ports:
+      - "2003:2003"
+    networks:
+      - spring-cloud-network
 
-    discovery:
-        build: ./platform-services/discovery/target/
-        ports:
-            - "8761:8761"
-        networks:
-            - spring-cloud-network
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
+  discovery:
+    build: ./platform-services/discovery/target/
+    mem_limit: 256m
+    mem_reservation: 128M
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-cloud-network
 
-    apigateway:
-        build: ./platform-services/apigateway/target/
-        ports:
-            - "8765:8765"
-        links:
-            - discovery
-        networks:
-            - spring-cloud-network
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
+  apigateway:
+    build: ./platform-services/apigateway/target/
+    mem_limit: 256m
+    mem_reservation: 128M
+    ports:
+      - "8765:8765"
+    links:
+      - discovery
+    networks:
+      - spring-cloud-network
 
-    one:
-        build: ./business-services/one/target/
-        environment:
-            debug: true
-        links:
-            - zipkin
-            - graphite
-            - discovery
-        networks:
-            - spring-cloud-network
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
+  one:
+    build: ./business-services/one/target/
+    mem_limit: 256m
+    mem_reservation: 128M
+    links:
+      - zipkin
+      - graphite
+      - discovery
+    networks:
+      - spring-cloud-network
 
-    two:
-        build: ./business-services/two/target/
-        links:
-            - zipkin
-            - graphite
-            - discovery
-        networks:
-            - spring-cloud-network
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
+  two:
+    build: ./business-services/two/target/
+    mem_limit: 256m
+    mem_reservation: 128M
+    links:
+      - zipkin
+      - graphite
+      - discovery
+    networks:
+      - spring-cloud-network
 
 networks:
-    spring-cloud-network:
-        driver: bridge
+  spring-cloud-network:
+    driver: bridge

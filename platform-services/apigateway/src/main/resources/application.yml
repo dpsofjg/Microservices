@@ -6,15 +6,16 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: http://localhost:8761/eureka
+  #      defaultZone: http://discovery:8761/eureka
   instance:
     preferIpAddress: true
 
 zuul:
   routes:
-    service_one:
-      path: /one
+     one:
+      path: /one/**
       url: http://localhost:8081/greeting/
-    service_two:
-      path: /two
+     two:
+      path: /two/**
       url: http://localhost:8082/greeting/
