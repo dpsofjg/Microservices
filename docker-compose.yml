@@ -2,7 +2,7 @@ version: '2'
 services:
   zipkin:
     image: openzipkin/zipkin
-    mem_limit: 256m
+    mem_limit: 512m
     mem_reservation: 128M
     ports:
       - "9411:9411"
@@ -11,7 +11,7 @@ services:
 
   graphite:
     image: graphiteapp/graphite-statsd
-    mem_limit: 256m
+    mem_limit: 512m
     mem_reservation: 128M
     ports:
       - "2003:2003"
@@ -20,7 +20,7 @@ services:
 
   discovery:
     build: ./platform-services/discovery/target/
-    mem_limit: 256m
+    mem_limit: 512m
     mem_reservation: 128M
     ports:
       - "8761:8761"
@@ -29,7 +29,7 @@ services:
 
   apigateway:
     build: ./platform-services/apigateway/target/
-    mem_limit: 256m
+    mem_limit: 512m
     mem_reservation: 128M
     ports:
       - "8765:8765"
@@ -40,7 +40,9 @@ services:
 
   one:
     build: ./business-services/one/target/
-    mem_limit: 256m
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka
+    mem_limit: 512m
     mem_reservation: 128M
     links:
       - zipkin
@@ -51,7 +53,7 @@ services:
 
   two:
     build: ./business-services/two/target/
-    mem_limit: 256m
+    mem_limit: 512m
     mem_reservation: 128M
     links:
       - zipkin

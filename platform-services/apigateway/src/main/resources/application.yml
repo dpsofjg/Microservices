@@ -2,12 +2,12 @@ spring:
   application:
     name: apigateway
 server:
-  port: 8762
+  port: 8765
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-  #      defaultZone: http://discovery:8761/eureka
+#      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery:8761/eureka
   instance:
     preferIpAddress: true
 
@@ -15,7 +15,7 @@ zuul:
   routes:
      one:
       path: /one/**
-      url: http://localhost:8081/greeting/
+      url: http://one:8081/greeting/
      two:
       path: /two/**
-      url: http://localhost:8082/greeting/
+      url: http://two:8082/greeting/
